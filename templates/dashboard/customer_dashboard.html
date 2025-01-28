@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="p-5 mb-4 bg-light rounded-3">
+    <div class="container-fluid py-5">
+        <h1 class="display-5 fw-bold">IT Helpdesk Dashboard</h1>
+        <p class="col-md-8 fs-4"> using a series of utilities, you can create tickets and check status and resolved tickets information</p>
+        <a href="{% url 'create-ticket' %}" class="btn btn-primary btn-lg" type="button">Create New Ticket</a>
+    </div>
+</div>
+<div>
+    <div class="row">
+        <div class="col">
+            <div class="p-5 mb-4 bg-light rounded-3">
+                <div class="container-fluid py-5">
+                    <h1 class="display-6 fw-bold">Active Tickets <br><a href="{% url 'customer-active-tickets' %}" class="text-decoration-none">{{active_tickets}}</a></h1>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="p-5 mb-4 bg-light rounded-3">
+                <div class="container-fluid py-5">
+                    <h1 class="display-6 fw-bold">Closed Tickets <br><a href="{% url 'customer-resolved-tickets' %}" class="text-decoration-none">{{closed_tickets}}</a></h1>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="p-5 mb-4 bg-light rounded-3">
+                <div class="container-fluid py-5">
+                    <h1 class="display-6 fw-bold">Total Tickets <br>{{tickets}}</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock content %}
