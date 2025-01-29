@@ -22,7 +22,7 @@ def create_ticket(request):
             var = form.save(commit=False)
             var.customer = request.user
             while not var.ticket_id:
-                id = ''.join(random.choices(string.digits, k=6))
+                id = ''.join(random.choices(string.digits, k=7))
                 try:
                     var.ticket_id = id
                     var.save()
@@ -110,6 +110,7 @@ def ticket_queue(request):
     return render(request, 'ticket/ticket_queue.html', context)
 
 
+# Resolved Tickets
 def resolve_ticket(request, ticket_id):
     ticket = Ticket.objects.get(ticket_id=ticket_id)
     if request.method == 'POST':
@@ -120,3 +121,10 @@ def resolve_ticket(request, ticket_id):
         ticket.save()
         messages.success(request, 'Ticket is now resolved and closed')
         return redirect('dashboard')
+    
+
+# All Active Tickets
+def allactivetickets(request):
+    tickets = Ticket.objects.all()
+    context = {'tickets':tickets}
+    return render(request, 'ticket/allactive_tickets.html', context)

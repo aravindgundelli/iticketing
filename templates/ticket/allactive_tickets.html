@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block content %}
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Ticket ID</th>
+            <th scope="col">Title</th>
+            <th scope="col">Resolution</th>
+            <th scope="col">Status</th>
+            <th scope="col">created_on</th>
+            <th scope="col">Created by</th>
+            <th scope="col">Resolved_on</th>
+            <th scope="col">Resolved_by</th>
+            <th scope="col">View Details</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for ticket in tickets %}
+        <tr>
+            <th scope="row">{{ticket.ticket_id}}</th>
+            <td>{{ticket.ticket_title}}</td>
+            <td>{{ticket.resolution_steps}}</td>
+            <td>
+                {% if ticket.status == 'Pending' %}
+                <span class="badge bg-warning">Pending</span>
+                {% elif ticket.status == 'Active' %}
+                <span class="badge bg-success">Active</span>
+                {% elif ticket.status == 'Resolved' %}
+                <span class="badge bg-danger">Resolved</span>
+                {% endif %}
+            </td>
+            <td>{{ticket.created_on}}</td>
+            <td>{{ticket.customer}}</td>
+            <td>{{ticket.last_modified}}</td>
+            <td>{{ticket.engineer}}</td>
+            <td><a href="{% url 'ticket-details' ticket.ticket_id  %}" class="btn btn-primary btn-sm">View Details</a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock content %}
